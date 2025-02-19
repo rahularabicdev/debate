@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #ff5733;
+    --secondary: #3366ff;
+  }
+}
+
+@layer utilities {
+  .bg-primary {
+    background-color: var(--primary);
+  }
+
+  .bg-secondary {
+    background-color: var(--secondary);
+  }
+}
