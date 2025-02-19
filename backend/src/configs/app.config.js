@@ -29,7 +29,7 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.options("*", cors(corsOptions));
 
 // Routes
-app.use("/api/users", userRoutes);
+// app.use("/api/users", userRoutes);
 
 // Test Route
 app.get("/api", (req, res) => {
