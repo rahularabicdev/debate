@@ -16,21 +16,24 @@ export const emailValidation = (email) => {
   return email;
 };
 
+// Username Validation
+export const usernameValidation = (username) => {
+  const usernameRegex = /^[a-zA-Z0-9]{3,16}$/;
+  if (!usernameRegex.test(username)) {
+    throw new ApiError(
+      400,
+      "Username must be 3-16 characters long and contain only letters and numbers."
+    );
+  }
+  return username.toLowerCase().trim();
+};
+
 // Password Validation
 export const passwordValidation = (password) => {
   if (password.length <= 6) {
     throw new ApiError(400, "Password length must be minimum 6 characters");
   }
   return password;
-};
-
-// Phone Number Validation
-export const phoneNumberValidation = (phoneNumber) => {
-  const phoneRegex = /^\d{10,15}$/;
-  if (!phoneRegex.test(phoneNumber)) {
-    throw new ApiError(400, "Please enter a valid phone number");
-  }
-  return phoneNumber;
 };
 
 // Compare Field Validation
