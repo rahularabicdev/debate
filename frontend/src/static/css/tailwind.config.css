@@ -1,18 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
 @import "tailwindcss";
 
 @layer base {
   :root {
-    --primary: #ff5733;
-    --secondary: #3366ff;
+    /* Colors */
+    --success: #34c759;
+    --emphasis: #af71ff;
+    --info: #5c92ff;
+    --warning: #ffd60a;
+
+    --light: #ffffff;
+    --light-alt: #f8f9fa;
+
+    --dark: #000000;
+    --dark-alt: #3a3a3a;
+
+    /* Fonts */
+    --sans-serif: "Raleway", serif;
   }
 }
 
+* {
+  box-sizing: border-box;
+  font-family: var(--sans-serif);
+}
+
 @layer utilities {
-  .bg-primary {
-    background-color: var(--primary);
+  /* Background Utilities */
+  .bg-success {
+    background-color: var(--success);
+  }
+  .bg-emphasis {
+    background-color: var(--emphasis);
+  }
+  .bg-info {
+    background-color: var(--info);
+  }
+  .bg-warning {
+    background-color: var(--warning);
+  }
+  .bg-light {
+    background-color: var(--light);
+  }
+  .bg-light-alt {
+    background-color: var(--light-alt);
+  }
+  .bg-dark {
+    background-color: var(--dark);
+  }
+  .bg-dark-alt {
+    background-color: var(--dark-alt);
   }
 
-  .bg-secondary {
-    background-color: var(--secondary);
+  /* Text Color Utilities */
+  .text-success {
+    color: var(--success);
+  }
+  .text-emphasis {
+    color: var(--emphasis);
+  }
+  .text-info {
+    color: var(--info);
+  }
+  .text-warning {
+    color: var(--warning);
+  }
+  .text-light {
+    color: var(--light);
+  }
+  .text-light-alt {
+    color: var(--light-alt);
+  }
+  .text-dark {
+    color: var(--dark);
+  }
+  .text-dark-alt {
+    color: var(--dark-alt);
+  }
+
+  /* Container */
+  .container {
+    @apply container mx-auto;
   }
 }
