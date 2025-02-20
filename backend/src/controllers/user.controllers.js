@@ -195,3 +195,20 @@ export const logoutUserController = asyncHandler(async (req, res) => {
     .clearCookie("refreshToken", options)
     .json(new ApiResponse(200, {}, "User logged out!"));
 });
+
+// Fetch User Profile Controller
+export const fetchUserProfileController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get User from Request
+   * TODO: Send Response
+   * **/
+
+  // * Get User from Request
+  const requestUser = req.user;
+  const user = await User.findById(requestUser._id);
+
+  // * Sending Response
+  res
+    .status(200)
+    .json(new ApiResponse(200, user, "Fetched User Profile Successfully!"));
+});

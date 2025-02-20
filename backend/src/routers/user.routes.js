@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  fetchUserProfileController,
   loginUserController,
   logoutUserController,
   registerUserController,
@@ -15,5 +16,7 @@ const router = Router();
 router.route("/register").post(registerUserController);
 router.route("/login").post(loginUserController);
 router.route("/logout").post(isLoggedIn, logoutUserController);
+
+router.route("/fetch-profile").post(isLoggedIn, fetchUserProfileController);
 
 export default router;
