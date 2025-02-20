@@ -17,6 +17,7 @@ import {
   generate20CharToken,
   generateAccessRefreshToken,
   options,
+  generatePasswordResetToken,
 } from "../utils/generateToken.js";
 
 // Register User Controller
@@ -83,6 +84,7 @@ export const registerUserController = asyncHandler(async (req, res) => {
   // * Save Verification Code
   const token = generate20CharToken();
   generateVerificationToken(user._id, token);
+  // ! Sending Verification Code does not work
 
   // * Generate Access & Refresh Token
   const { accessToken, refreshToken } = await generateAccessRefreshToken(
@@ -277,4 +279,41 @@ export const refreshAccessTokenController = asyncHandler(async (req, res) => {
       error.message || "Invalid or expired refresh token"
     );
   }
+});
+
+// Forgot Password Controller
+export const forgotPasswordController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get email from frontend
+   * TODO: Validate data
+   * TODO: Check if user exists
+   * TODO: Sending Email with password reset token
+   * TODO: Sending Response
+   * **/
+
+  // * Get email from frontend
+  const { email } = req.body;
+
+  // * Validate data
+  if (!email) {
+    throw new ApiError(400, "Please enter your email.");
+  }
+  emailValidation(email);
+
+  // * Check if user exists
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new ApiError(400, "User does not exist");
+  }
+
+  // * Sending Email with password reset token
+  const token = generate20CharToken();
+  generatePasswordResetToken(user._id, token);
+  // ! if (email) sendPasswordResetEmail(user.email, user.firstName, token);
+  // ! if (phoneNumber) sendPasswordResetMessage(user.phoneNumber, user.firstName, token);
+
+  // * Sending Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Password reset link sent to your email"));
 });

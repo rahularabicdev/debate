@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   fetchUserProfileController,
+  forgotPasswordController,
   loginUserController,
   logoutUserController,
   refreshAccessTokenController,
@@ -20,5 +21,7 @@ router.route("/logout").post(isLoggedIn, logoutUserController);
 
 router.route("/fetch-profile").post(isLoggedIn, fetchUserProfileController);
 router.route("/refresh-access-token").post(refreshAccessTokenController);
+
+router.route("/forgot-password").post(forgotPasswordController);
 
 export default router;
