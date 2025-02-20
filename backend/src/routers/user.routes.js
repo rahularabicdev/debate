@@ -8,6 +8,7 @@ import {
   refreshAccessTokenController,
   registerUserController,
   resetPasswordController,
+  verifyAccountRequestController,
 } from "../controllers/user.controllers.js";
 import uploadMiddleware from "../middlewares/multer.middlewares.js";
 import { isLoggedIn } from "../middlewares/auth.middlewares.js";
@@ -27,5 +28,9 @@ router.route("/refresh-access-token").post(refreshAccessTokenController);
 router.route("/forgot-password").post(forgotPasswordController);
 router.route("/forgot-password-request").patch(forgotPasswordRequestController);
 router.route("/reset-password").patch(isLoggedIn, resetPasswordController);
+
+router
+  .route("/verify-account-request")
+  .patch(isLoggedIn, verifyAccountRequestController);
 
 export default router;

@@ -403,3 +403,30 @@ export const resetPasswordController = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, {}, "Password updated successfully!"));
 });
+
+// Verify Account Request Controller
+export const verifyAccountRequestController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get user from request
+   * TODO: Check if is verified, if not send verification email
+   * TODO: Sending Response
+   * **/
+
+  // * Get user from request
+  const user = req.user;
+
+  // * Check if is verified, if not send verification email
+  if (user.isVerified) {
+    throw new ApiError(400, "Account is already verified");
+  }
+
+  // * Sending Verification Email
+  const token = generate20CharToken();
+  generateVerificationToken(user._id, token);
+  // ! sendVerificationEmail(user.email, user.firstName, token);
+
+  // * Sending Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Verification link sent to your email"));
+});
