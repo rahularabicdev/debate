@@ -3,6 +3,7 @@ import {
   fetchUserProfileController,
   loginUserController,
   logoutUserController,
+  refreshAccessTokenController,
   registerUserController,
 } from "../controllers/user.controllers.js";
 import uploadMiddleware from "../middlewares/multer.middlewares.js";
@@ -18,5 +19,6 @@ router.route("/login").post(loginUserController);
 router.route("/logout").post(isLoggedIn, logoutUserController);
 
 router.route("/fetch-profile").post(isLoggedIn, fetchUserProfileController);
+router.route("/refresh-access-token").post(refreshAccessTokenController);
 
 export default router;
