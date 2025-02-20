@@ -7,25 +7,43 @@ export const notEmptyValidation = (fields) => {
   return fields;
 };
 
-// Email Validation
+// Email Validation Function
 export const emailValidation = (email) => {
-  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  if (!emailRegex.test(email)) {
-    throw new ApiError(400, "Please enter a valid email!");
+  if (!email || typeof email !== "string") {
+    throw new Error("Email is required.");
   }
-  return email;
+
+  if (!emailValidation.test(email)) {
+    throw new Error("Please enter a valid email address.");
+  }
+
+  return email.trim().toLowerCase();
+};
+// Test Method on Email Validation
+emailValidation.test = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email.trim());
 };
 
-// Username Validation
+// Username Validation Function
 export const usernameValidation = (username) => {
-  const usernameRegex = /^[a-zA-Z0-9]{3,16}$/;
-  if (!usernameRegex.test(username)) {
+  if (!username || typeof username !== "string") {
+    throw new ApiError(400, "Username is required.");
+  }
+
+  if (!usernameValidation.test(username)) {
     throw new ApiError(
       400,
       "Username must be 3-16 characters long and contain only letters and numbers."
     );
   }
-  return username.toLowerCase().trim();
+
+  return username.trim().toLowerCase();
+};
+// Test Method on Username Validation
+usernameValidation.test = (username) => {
+  const usernameRegex = /^[a-zA-Z0-9]{3,16}$/;
+  return usernameRegex.test(username.trim());
 };
 
 // Password Validation

@@ -106,3 +106,67 @@ export const registerUserController = asyncHandler(async (req, res) => {
       )
     );
 });
+
+// Login User Controller
+export const loginUserController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get data from user
+   * TODO: Validate data
+   * TODO: Check if user exists
+   * TODO: Check Password
+   * TODO: Generate Token
+   * TODO: Sending Response
+   * **/
+
+  // * Get data from User
+  const { identifier, password } = req.body;
+
+  // * Validate data
+  notEmptyValidation([identifier, password]);
+
+  // * Determine if the identifier is an email or username
+  let isEmail = false;
+  if (emailValidation.test(identifier)) {
+    isEmail = true;
+  } else if (!usernameValidation.test(identifier)) {
+    throw new ApiError(400, "Invalid email or username format.");
+  }
+
+  // * Find user based on identifier type
+  const user = await User.findOne(
+    isEmail ? { email: identifier } : { username: identifier }
+  ).select("password");
+
+  if (!user) {
+    throw new ApiError(404, "User not found.");
+  }
+
+  // * Check Password
+  const passwordCheck = await user.isPasswordCorrect(password);
+  if (!passwordCheck) {
+    throw new ApiError(401, "Invalid password");
+  }
+
+  // * Generate Token
+  const { accessToken, refreshToken } = await generateAccessRefreshToken(
+    user._id
+  );
+  const loggedInUser = await User.findById(user._id);
+
+  // * Sending Response
+  return res
+    .status(200)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
+    .json(
+      new ApiResponse(
+        200,
+        {
+          user: loggedInUser,
+          accessToken,
+          refreshToken,
+        },
+        "User logged in successfully!"
+      )
+    );
+});
