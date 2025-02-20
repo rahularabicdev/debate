@@ -36,7 +36,7 @@ export const isLoggedIn = asyncHandler(async (req, res, next) => {
 export const isUserVerified = asyncHandler(async (req, res, next) => {
   try {
     const user = req.user;
-    if (!user.verified) {
+    if (!user.isVerified) {
       throw new ApiError(
         400,
         `Please verify your account before changing the role`

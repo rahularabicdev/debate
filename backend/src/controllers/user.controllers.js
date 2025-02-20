@@ -430,3 +430,38 @@ export const verifyAccountRequestController = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse(200, {}, "Verification link sent to your email"));
 });
+
+// Verify Account Controller
+export const verifyAccountController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get token from params
+   * TODO: Validate token
+   * TODO: Verify account
+   * TODO: Sending Response
+   * **/
+
+  // * Get token from params
+  const { token } = req.query;
+  if (!token) throw new ApiError(400, "Token is required");
+
+  // * Validate token
+  const user = await User.findOne({ verificationToken: token });
+  if (!user) {
+    throw new ApiError(400, "Invalid token");
+  }
+  const currentDate = new Date();
+  if (currentDate > user.verificationTokenExpiry) {
+    throw new ApiError(400, "Verification token has expired");
+  }
+
+  // * Verify account
+  user.isVerified = true;
+  user.verificationToken = undefined;
+  user.verificationTokenExpiry = undefined;
+  await user.save();
+
+  // * Sending Response
+  return res
+    .status(200)
+    .json(new ApiResponse(200, {}, "Account verified successfully!"));
+});

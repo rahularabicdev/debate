@@ -8,6 +8,7 @@ import {
   refreshAccessTokenController,
   registerUserController,
   resetPasswordController,
+  verifyAccountController,
   verifyAccountRequestController,
 } from "../controllers/user.controllers.js";
 import uploadMiddleware from "../middlewares/multer.middlewares.js";
@@ -32,5 +33,6 @@ router.route("/reset-password").patch(isLoggedIn, resetPasswordController);
 router
   .route("/verify-account-request")
   .patch(isLoggedIn, verifyAccountRequestController);
+router.route("/verify-account").patch(isLoggedIn, verifyAccountController);
 
 export default router;
