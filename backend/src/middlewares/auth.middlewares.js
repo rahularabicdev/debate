@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import ApiError from "../utils/apiError.js";
 import asyncHandler from "../utils/asyncHandler.js";
 import User from "../models/user.model.js";
-import UserRole from "../models/user-role.model.js";
 
 // Verify that the user is authenticated
 export const isLoggedIn = asyncHandler(async (req, res, next) => {

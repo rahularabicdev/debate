@@ -15,6 +15,8 @@ import {
 import {
   generateVerificationToken,
   generate20CharToken,
+  generateAccessRefreshToken,
+  options,
 } from "../utils/generateToken.js";
 
 // Register User Controller
@@ -81,8 +83,26 @@ export const registerUserController = asyncHandler(async (req, res) => {
   // * Save Verification Code
   const token = generate20CharToken();
   generateVerificationToken(user._id, token);
-  sendVerificationCodeEmail(user.email, token);
+
+  // * Generate Access & Refresh Token
+  const { accessToken, refreshToken } = await generateAccessRefreshToken(
+    user._id
+  );
 
   // * Sending Response
-  res.status(201).json(new ApiResponse(201, "User registered successfully"));
+  return res
+    .status(201)
+    .cookie("accessToken", accessToken, options)
+    .cookie("refreshToken", refreshToken, options)
+    .json(
+      new ApiResponse(
+        201,
+        {
+          user,
+          accessToken,
+          refreshToken,
+        },
+        "User created successfully!"
+      )
+    );
 });
