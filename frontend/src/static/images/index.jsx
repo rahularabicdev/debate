@@ -1,3 +1,5 @@
 import Logo from "./logo.svg";
 
-export { Logo };
+import AuthImage from "./auth-image.jpg";
+
+export { Logo, AuthImage };

@@ -25,4 +25,9 @@
     width: calc(100% - 20px);
     @apply mx-auto;
   }
+
+  /* Button */
+  .button {
+    @apply px-4 py-3 w-full text-white bg-black rounded-md transition duration-500 hover:bg-stone-900 cursor-pointer;
+  }
 }

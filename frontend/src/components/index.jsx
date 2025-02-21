@@ -1,4 +1,6 @@
 import Footer from "./Footer";
 import Header from "./Header";
 
-export { Header, Footer };
+import FormInput from "./form/Input";
+
+export { Header, Footer, FormInput };

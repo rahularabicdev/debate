@@ -12,7 +12,7 @@ const initialState = {
     username: "",
     firstName: "",
     lastName: "",
-    birthDate: "",
+    dateOfBirth: "",
   },
 };
 

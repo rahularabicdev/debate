@@ -1,3 +1,5 @@
 import Home from "./home/Home";
 
-export { Home };
+import GetStarted from "./get-started/GetStarted";
+
+export { Home, GetStarted };
