@@ -20,4 +20,9 @@
   .container {
     @apply container mx-auto;
   }
+  .container-expanded {
+    max-width: calc(100% - 20px);
+    width: calc(100% - 20px);
+    @apply mx-auto;
+  }
 }

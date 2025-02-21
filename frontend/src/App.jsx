@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router";
 
-import { Header } from "./components";
+import { Footer, Header } from "./components";
 import Routes from "./utils/Routes";
 
 const App = () => {
@@ -9,6 +9,7 @@ const App = () => {
       <BrowserRouter>
         <Header />
         <Routes />
+        <Footer />
       </BrowserRouter>
     </>
   );
