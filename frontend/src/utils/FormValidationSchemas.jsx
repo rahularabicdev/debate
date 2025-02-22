@@ -20,3 +20,9 @@ export const registerSchemaValidation = yup.object().shape({
     .string()
     .oneOf([yup.ref("password"), null], "Password must match"),
 });
+
+// Login Schema Validation
+export const loginSchemaValidation = yup.object().shape({
+  identifier: yup.string().required("Please enter Email / Username"),
+  password: yup.string().required("Please enter Password"),
+});
