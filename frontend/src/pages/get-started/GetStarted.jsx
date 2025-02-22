@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import Login from "./Login";
 import Register from "./Register";
+import ForgotPassword from "./ForgotPassword";
 
 const GetStarted = () => {
   const [page, setPage] = useState("login");
@@ -12,10 +13,10 @@ const GetStarted = () => {
         <div className="container">
           <div className="flex justify-center w-full max-w-[800px] mx-auto">
             <div className="bg-white rounded-2xl overflow-hidden shadow-xl w-full grid grid-cols-2">
-              {page === "login" ? (
-                <Login setPage={setPage} />
-              ) : (
-                <Register setPage={setPage} />
+              {page === "login" && <Login setPage={setPage} />}
+              {page === "register" && <Register setPage={setPage} />}
+              {page === "forgot-password" && (
+                <ForgotPassword setPage={setPage} />
               )}
             </div>
           </div>

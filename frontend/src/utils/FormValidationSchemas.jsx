@@ -26,3 +26,12 @@ export const loginSchemaValidation = yup.object().shape({
   identifier: yup.string().required("Please enter Email / Username"),
   password: yup.string().required("Please enter Password"),
 });
+
+// Forgot Password Schema Validation
+export const forgotPasswordSchemaValidation = yup.object().shape({
+  email: yup
+    .string()
+    .email("Please enter a valid email")
+    .matches(emailRegex, "Email format is invalid")
+    .required("Please enter Email"),
+});
