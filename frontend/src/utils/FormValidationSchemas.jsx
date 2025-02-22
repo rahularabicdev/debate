@@ -35,3 +35,14 @@ export const forgotPasswordSchemaValidation = yup.object().shape({
     .matches(emailRegex, "Email format is invalid")
     .required("Please enter Email"),
 });
+
+// Forgot Password Request Schema Validation
+export const forgotPasswordRequestSchemaValidation = yup.object().shape({
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Please enter Password"),
+  password2: yup
+    .string()
+    .oneOf([yup.ref("password"), null], "Password must match"),
+});

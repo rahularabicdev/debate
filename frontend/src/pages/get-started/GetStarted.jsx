@@ -3,6 +3,7 @@ import { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
+import ForgotPasswordRequest from "./ForgotPasswordRequest";
 
 const GetStarted = () => {
   const [page, setPage] = useState("login");
@@ -17,6 +18,9 @@ const GetStarted = () => {
               {page === "register" && <Register setPage={setPage} />}
               {page === "forgot-password" && (
                 <ForgotPassword setPage={setPage} />
+              )}
+              {page === "forgot-password-request" && (
+                <ForgotPasswordRequest setPage={setPage} />
               )}
             </div>
           </div>
