@@ -1,6 +1,8 @@
-import { Logo } from "../static/images";
-
 import { Link, NavLink } from "react-router";
+import { useSelector } from "react-redux";
+
+import { Logo } from "../static/images";
+import LogoutBtn from "./LogoutBtn";
 
 const navLinks = [
   {
@@ -18,6 +20,8 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
   return (
     <header className="bg-black py-4 rounded-b-3xl">
       <div className="container">
@@ -34,14 +38,27 @@ const Header = () => {
                 </NavLink>
               </li>
             ))}
-            <li>
-              <NavLink
-                to="/get-started"
-                className="font-semibold border border-solid border-white bg-white rounded-lg rounded-br-none px-4 py-2 transition duration-500 hover:bg-black hover:text-white"
-              >
-                Get Started
-              </NavLink>
-            </li>
+            {isAuthenticated ? (
+              <li className="flex items-end gap-3">
+                <NavLink
+                  to="/profile"
+                  className="font-semibold border border-solid border-white text-white bg-black rounded-lg rounded-br-none px-4 py-2 transition duration-500 hover:bg-white hover:text-black"
+                >
+                  Profile
+                </NavLink>
+
+                <LogoutBtn />
+              </li>
+            ) : (
+              <li>
+                <NavLink
+                  to="/get-started"
+                  className="font-semibold border border-solid border-white bg-white rounded-lg rounded-br-none px-4 py-2 transition duration-500 hover:bg-black hover:text-white"
+                >
+                  Get Started
+                </NavLink>
+              </li>
+            )}
           </ul>
         </div>
       </div>

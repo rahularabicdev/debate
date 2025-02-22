@@ -23,7 +23,7 @@ router.route("/register").post(registerUserController);
 router.route("/login").post(loginUserController);
 router.route("/logout").post(isLoggedIn, logoutUserController);
 
-router.route("/fetch-profile").post(isLoggedIn, fetchUserProfileController);
+router.route("/fetch-profile").get(isLoggedIn, fetchUserProfileController);
 router.route("/refresh-access-token").post(refreshAccessTokenController);
 
 router.route("/forgot-password").post(forgotPasswordController);
