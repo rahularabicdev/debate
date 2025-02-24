@@ -4,7 +4,7 @@ import asyncHandler from "../utils/asyncHandler.js";
 import ApiResponse from "../utils/apiResponse.js";
 import { notEmptyValidation } from "../utils/validators.js";
 
-// Get All Tags
+// Get All Tags Controller
 export const getAllTagsController = asyncHandler(async (req, res) => {
   /**
    * TODO: Get All Tags
@@ -20,7 +20,7 @@ export const getAllTagsController = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, tags, "Fetched all tags successfully!"));
 });
 
-// Create Tag
+// Create Tag Controller
 export const createTagController = asyncHandler(async (req, res) => {
   /**
    * TODO: Get data from frontend
@@ -52,4 +52,23 @@ export const createTagController = asyncHandler(async (req, res) => {
 
   // * Sending Response
   res.status(201).json(new ApiResponse(201, tag, "Tag created successfully!"));
+});
+
+// Tag Detail Controller
+export const tagDetailController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get Id from Params
+   * TODO: Fetch Detail
+   * TODO: Sending Response
+   * **/
+
+  // * Get Id from Params
+  const tagId = req.params.id;
+
+  // * Fetch Detail
+  const tag = await Tag.findById(tagId);
+  if (!tag) throw new ApiError(404, "Tag not found!");
+
+  // * Sending Response
+  res.status(200).json(new ApiResponse(200, tag, "Tag fetched successfully!"));
 });
