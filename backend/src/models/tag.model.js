@@ -10,7 +10,7 @@ const TagSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    createdBy: {
+    user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },

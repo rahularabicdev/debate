@@ -31,7 +31,7 @@ export const createTagController = asyncHandler(async (req, res) => {
    * **/
 
   // * Get data from frontend
-  const user = req.user;
+  const reqUser = req.user;
   const { name, description } = req.body;
 
   // * Validate Data
@@ -47,7 +47,7 @@ export const createTagController = asyncHandler(async (req, res) => {
   const tag = await Tag.create({
     name,
     description,
-    createdBy: user._id,
+    user: reqUser._id,
   });
 
   // * Sending Response
@@ -71,4 +71,43 @@ export const tagDetailController = asyncHandler(async (req, res) => {
 
   // * Sending Response
   res.status(200).json(new ApiResponse(200, tag, "Tag fetched successfully!"));
+});
+
+// Tag Update Controller
+export const tagUpdateController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get data from request
+   * TODO: Validate data
+   * TODO: Update Tag
+   * TODO: Sending Response
+   * **/
+
+  // * Get data from request
+  const tagId = req.params.id;
+  const { name, description } = req.body;
+
+  // * Validate Tag Id
+  const tag = await Tag.findById(tagId);
+  if (!tag) throw new ApiError(404, "Tag not found!");
+
+  // * Validate Data
+  // Check if the name has changed
+  if (name !== tag.name) {
+    // * Check if the new name already exists in the database
+    const existingName = await Tag.findOne({ name });
+
+    if (existingName) {
+      return res
+        .status(400)
+        .json(new ApiResponse(400, null, "Name already exists"));
+    }
+  }
+
+  // * Update Tag
+  tag.name = name;
+  tag.description = description;
+  await tag.save();
+
+  // * Sending Response
+  res.status(200).json(new ApiResponse(200, tag, "Tag updated successfully!"));
 });
