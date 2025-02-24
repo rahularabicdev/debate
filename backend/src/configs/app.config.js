@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
 
 import userRoutes from "../routers/user.routes.js";
+import roomRoutes from "../routers/room.routes.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.options("*", cors(corsOptions));
 
 // Routes
 app.use("/api/users", userRoutes);
+app.use("/api/rooms", roomRoutes);
 
 // Test Route
 app.get("/api", (req, res) => {
