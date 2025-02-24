@@ -2,18 +2,27 @@ import mongoose from "mongoose";
 
 const RoomSchema = new mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
       required: true,
       unique: true,
     },
-    topic: { type: String, required: true },
     description: { type: String, required: true },
     admin: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    tags: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tag",
+      },
+    ],
     participants: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     messages: [{ type: mongoose.Schema.Types.ObjectId, ref: "Message" }],
-    createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   { timestamps: true }
 );
