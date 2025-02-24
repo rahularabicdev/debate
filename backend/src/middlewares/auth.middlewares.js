@@ -39,7 +39,7 @@ export const isUserVerified = asyncHandler(async (req, res, next) => {
     if (!user.isVerified) {
       throw new ApiError(
         400,
-        `Please verify your account before changing the role`
+        `You are not authorized to access this page, please verify your account.`
       );
     }
 
