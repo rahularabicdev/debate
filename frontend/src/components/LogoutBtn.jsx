@@ -8,7 +8,7 @@ const LogoutBtn = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post(
+      await axios.post(
         `${import.meta.env.VITE_API_BASE_URL}/users/logout`,
         {},
         {
@@ -18,8 +18,6 @@ const LogoutBtn = () => {
           withCredentials: true,
         }
       );
-
-      console.log(response);
 
       // Clear all storage
       localStorage.clear();
