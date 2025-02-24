@@ -3,6 +3,7 @@ import { Router } from "express";
 import {
   createTagController,
   getAllTagsController,
+  tagDeleteController,
   tagDetailController,
   tagUpdateController,
 } from "../controllers/tag.controllers.js";
@@ -21,5 +22,8 @@ router.route("/:id").get(tagDetailController);
 router
   .route("/:id")
   .patch(isLoggedIn, isUserVerified, isAuthorized("Tag"), tagUpdateController);
+router
+  .route("/:id")
+  .delete(isLoggedIn, isUserVerified, isAuthorized("Tag"), tagDeleteController);
 
 export default router;

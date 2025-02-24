@@ -111,3 +111,22 @@ export const tagUpdateController = asyncHandler(async (req, res) => {
   // * Sending Response
   res.status(200).json(new ApiResponse(200, tag, "Tag updated successfully!"));
 });
+
+// Tag Delete Controller
+export const tagDeleteController = asyncHandler(async (req, res) => {
+  /**
+   * TODO: Get Id from Params
+   * TODO: Delete Tag
+   * TODO: Sending Response
+   * **/
+
+  // * Get Id from Params
+  const tagId = req.params.id;
+
+  // * Fetch Tag
+  const tag = await Tag.findByIdAndDelete(tagId);
+  if (!tag) throw new ApiError(404, "Tag not found!");
+
+  // * Sending Response
+  res.status(200).json(new ApiResponse(200, null, "Tag deleted successfully!"));
+});
