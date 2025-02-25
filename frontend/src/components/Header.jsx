@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation } from "react-router";
 import { useSelector } from "react-redux";
 
 import { Logo } from "../static/images";
@@ -20,10 +20,19 @@ const navLinks = [
 ];
 
 const Header = () => {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   return (
-    <header className="bg-black py-4 rounded-b-3xl">
+    <header
+      className={
+        isHome
+          ? "bg-transparent py-4 rounded-b-3xl absolute top-0 left-0 w-full z-50"
+          : "bg-black py-4 rounded-b-3xl"
+      }
+    >
       <div className="container">
         <div className="flex items-center justify-between gap-5">
           <Link to="/">
