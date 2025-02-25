@@ -1,7 +1,10 @@
+import { ChatBox, Messages } from "../../components";
+
 const Room = () => {
   return (
-    <div>
-      <h1>Room</h1>
+    <div className="relative h-[calc(100%_-_60px)]">
+      <Messages />
+      <ChatBox />
     </div>
   );
 };
