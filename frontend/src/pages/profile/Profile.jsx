@@ -20,7 +20,7 @@ const Profile = () => {
               </div>
               <div className="mx-auto mt-10 text-center">
                 <Link
-                  to="/start-debate"
+                  to="/room"
                   className="font-semibold border border-solid border-white bg-white rounded-lg rounded-br-none px-4 py-2 transition duration-500 hover:bg-[#004aad] hover:text-white"
                 >
                   Create Debate

@@ -1,7 +1,8 @@
 import { Routes as ReactRouter, Route, Navigate } from "react-router";
 import { useSelector } from "react-redux";
 
-import { GetStarted, Home, Profile } from "../pages";
+import { WebsiteLayout, RoomLayout } from "../layout";
+import { GetStarted, Home, Profile, Room } from "../pages";
 import ProtectedRoute from "./ProtectedRoute";
 
 const Routes = () => {
@@ -10,19 +11,31 @@ const Routes = () => {
   return (
     <>
       <ReactRouter>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<WebsiteLayout />}>
+          <Route index element={<Home />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/get-started"
+            element={isAuthenticated ? <Navigate to="/" /> : <GetStarted />}
+          />
+        </Route>
         <Route
-          path="/profile"
+          path="/room"
           element={
             <ProtectedRoute>
-              <Profile />
+              <RoomLayout />
             </ProtectedRoute>
           }
-        />
-        <Route
-          path="/get-started"
-          element={isAuthenticated ? <Navigate to="/" /> : <GetStarted />}
-        />
+        >
+          <Route index element={<Room />} />
+        </Route>
       </ReactRouter>
     </>
   );

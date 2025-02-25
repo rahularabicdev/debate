@@ -1,6 +1,5 @@
 import { BrowserRouter } from "react-router";
 
-import { Footer, Header } from "./components";
 import Routes from "./utils/Routes";
 import FetchUserData from "./utils/FetchUserData";
 import { socket } from "./utils/Socket";
@@ -24,10 +23,7 @@ const App = () => {
     <>
       <BrowserRouter>
         <FetchUserData />
-
-        <Header />
         <Routes />
-        <Footer />
       </BrowserRouter>
     </>
   );
