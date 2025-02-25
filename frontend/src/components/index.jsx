@@ -4,4 +4,6 @@ import LogoutBtn from "./LogoutBtn";
 
 import FormInput from "./form/Input";
 
-export { Header, Footer, FormInput, LogoutBtn };
+import RoomSidebar from "./room/Sidebar";
+
+export { Header, Footer, FormInput, LogoutBtn, RoomSidebar };
