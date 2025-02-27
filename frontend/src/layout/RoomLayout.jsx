@@ -7,7 +7,7 @@ const RoomLayout = () => {
     <>
       <main className="relative flex h-screen bg-gray-900">
         <RoomSidebar />
-        <div className="w-[calc(100%_-_300px)] overflow-y-auto overflow-x-hidden">
+        <div className="w-[calc(100%_-_300px)]">
           <RoomHeader />
           <Outlet />
         </div>

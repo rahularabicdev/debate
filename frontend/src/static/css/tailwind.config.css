@@ -15,7 +15,8 @@
   outline: none;
 }
 
-aside {
+aside,
+.hide-scrollbar {
   scrollbar-width: none;
 }
 
